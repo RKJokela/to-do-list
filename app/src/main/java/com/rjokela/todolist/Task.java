@@ -1,15 +1,20 @@
 package com.rjokela.todolist;
 
-// TODO: add imports as needed
+import android.util.Log;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Stores the data for a single item in a to-do list
  */
 public class Task implements Comparable<Task> {
+    public static final String TAG = "Task";
+
     // format of due date
-    public static final String DATE_FORMAT = "MM/dd/yy";
-    private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+    public static final String DATE_FORMAT_STRING = "MM/dd/yy";
+    private static final DateFormat DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT_STRING, Locale.US);
     
     // sort options
     public static final int SORT_BY_DATE = 1;
@@ -28,15 +33,15 @@ public class Task implements Comparable<Task> {
     public Task(String title, String dueDate) {
         id = 0;
         this.title = title;
-        description = new String("");
-        details = new String("");
-        this.dueDate = dateFormat.parse(dueDate);
+        description = "";
+        details = "";
+        setDueDateString(dueDate);
     }
     public Task(long id, String title, String desc, String dueDate, String details) {
         this.id = id;
         this.title = title;
         this.description = desc;
-        this.dueDate = dateFormat.parse(dueDate);
+        setDueDateString(dueDate);
         this.details = details;
     }
     
@@ -45,7 +50,7 @@ public class Task implements Comparable<Task> {
     public String getTitle() { return title; }
     public String getDescription() { return description; }
     public Date getDueDate() { return dueDate; }
-    public String getDueDateString() { return dateFormat.format(dueDate); }
+    public String getDueDateString() { return DATE_FORMAT.format(dueDate); }
     public String getDetails() { return details; }
     public int getSortMethod() { return sortMethod; }
     
@@ -54,7 +59,13 @@ public class Task implements Comparable<Task> {
     public void setTitle(String title) { this.title = title; }
     public void setDescription(String description) { this.description = description; }
     public void setDueDate(Date dueDate) { this.dueDate = dueDate; }
-    public void setDueDateString(String dueDate) { this.dueDate = dateFormat.parse(dueDate); }
+    public void setDueDateString(String dueDate) {
+        try {
+            this.dueDate = DATE_FORMAT.parse(dueDate);
+        } catch (Exception e) {
+            Log.d(TAG, "setDueDateString - error parsing string '" + dueDate + "'", e);
+        }
+    }
     public void setDetails(String details) { this.details = details; }
     public static void setSortMethod(int sortBy) {
         if (sortBy >= SORT_BY_DATE && sortBy <= SORT_BY_TITLE)
@@ -72,7 +83,7 @@ public class Task implements Comparable<Task> {
         case SORT_BY_DATE:
             retval = dueDate.compareTo(otherTask.getDueDate()); break;
         case SORT_BY_ID:
-            retval = Integer.compare(id, otherTask.getId()); break;
+            retval = (Long.valueOf(id)).compareTo(otherTask.getId()); break;
         case SORT_BY_TITLE:
             retval = title.compareTo(otherTask.getTitle()); break;
         default:
