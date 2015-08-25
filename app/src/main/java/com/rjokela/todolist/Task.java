@@ -28,21 +28,19 @@ public class Task implements Comparable<Task> {
     private String description;
     private Date dueDate;
     private String details;
+    private boolean complete;
     
     // constructors
     public Task(String title, String dueDate) {
-        id = 0;
-        this.title = title;
-        description = "";
-        details = "";
-        setDueDateString(dueDate);
+        this(0, title, "", dueDate, "", false);
     }
-    public Task(long id, String title, String desc, String dueDate, String details) {
+    public Task(long id, String title, String desc, String dueDate, String details, boolean complete) {
         this.id = id;
         this.title = title;
         this.description = desc;
         setDueDateString(dueDate);
         this.details = details;
+        this.complete = complete;
     }
     
     // getters
@@ -52,6 +50,7 @@ public class Task implements Comparable<Task> {
     public Date getDueDate() { return dueDate; }
     public String getDueDateString() { return DATE_FORMAT.format(dueDate); }
     public String getDetails() { return details; }
+    public boolean isComplete() { return complete; }
     public int getSortMethod() { return sortMethod; }
     
     // setters
@@ -67,6 +66,7 @@ public class Task implements Comparable<Task> {
         }
     }
     public void setDetails(String details) { this.details = details; }
+    public void setComplete(boolean complete) { this.complete = complete; }
     public static void setSortMethod(int sortBy) {
         if (sortBy >= SORT_BY_DATE && sortBy <= SORT_BY_TITLE)
             sortMethod = sortBy;

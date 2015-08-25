@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/to_do_list_item_height"
+                android:paddingTop="@dimen/to_do_list_item_padding"
+                android:paddingBottom="@dimen/to_do_list_item_padding">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text that I am trying to figure out the length of and I don't know really how to format it"
+        android:id="@+id/to_do_list_item_title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:singleLine="true"
+        android:maxLength="30"
+        android:layout_toLeftOf="@+id/to_do_list_item_date"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text that needs to be really long because I am trying to investigate to see if at the end of it there will be an ellipsis thing"
+        android:id="@+id/to_do_list_item_desc"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_toLeftOf="@+id/to_do_list_item_date"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="12/31/88"
+        android:id="@+id/to_do_list_item_date"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:singleLine="false"/>
+</RelativeLayout>
