@@ -9,9 +9,20 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".ToDoListActivityFragment">
 
+    <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/taskList_toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
     <ListView
         android:id="@+id/taskList_listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/taskList_horizontal_padding"
+        android:paddingRight="@dimen/taskList_horizontal_padding" />
 
 </LinearLayout>

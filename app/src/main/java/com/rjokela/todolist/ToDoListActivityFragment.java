@@ -2,6 +2,8 @@ package com.rjokela.todolist;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +42,9 @@ public class ToDoListActivityFragment extends Fragment {
         };
 
         taskAdapter = new ArrayAdapter<Task>(getActivity(), android.R.layout.simple_list_item_1, tasks);
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.taskList_toolBar);
+        ((ActionBarActivity) getActivity()).setSupportActionBar(toolbar);
 
         ListView listView = (ListView) getActivity().findViewById(R.id.taskList_listView);
         listView.setAdapter(taskAdapter);
