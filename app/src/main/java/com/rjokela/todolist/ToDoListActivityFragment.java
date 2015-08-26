@@ -11,6 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -18,7 +23,7 @@ import android.widget.ListView;
 public class ToDoListActivityFragment extends Fragment {
     public static final String TAG = "ToDoListActivityFragment";
 
-    private Task[] tasks;
+    private List<Task> tasks;
     private ListAdapter taskAdapter;
 
     public ToDoListActivityFragment() {
@@ -35,13 +40,13 @@ public class ToDoListActivityFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // TODO: replace this placeholder task array
-        tasks = new Task[] {
+        tasks = Arrays.asList(
                 new Task("Do laundry", "03/16/15"),
                 new Task("Wash dishes", "08/02/15"),
                 new Task("Make bed", "09/22/15")
-        };
+        );
 
-        taskAdapter = new ArrayAdapter<Task>(getActivity(), android.R.layout.simple_list_item_1, tasks);
+        taskAdapter = new TaskAdapter(getActivity(), tasks);
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.taskList_toolBar);
         ((ActionBarActivity) getActivity()).setSupportActionBar(toolbar);
