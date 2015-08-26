@@ -1,7 +1,13 @@
 package com.rjokela.todolist;
 
-// TODO: import packages
-import android.provider.BaseColumns
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
+import android.util.Log;
+
+import java.util.List;
 
 public final class ToDoListDBHelper extends SQLiteOpenHelper {
     public static final String TAG = "ToDoListDBHelper";
@@ -52,7 +58,7 @@ public final class ToDoListDBHelper extends SQLiteOpenHelper {
     }
     
     public boolean delete(Task task) {
-        int deleted = getWritableDatabase().delete(TABLE_NAME, 
+        int deleted = getWritableDatabase().delete(TaskTable.TABLE_NAME,
             TaskTable._ID + "=" + task.getId(), null);
         return deleted > 0;
     }
@@ -83,7 +89,7 @@ public final class ToDoListDBHelper extends SQLiteOpenHelper {
     
     public void reset() {
         Log.d(TAG, "reset() called - clearing all entries");
-        getWritableDatabase().delete(TABLE_NAME, null, null);
+        getWritableDatabase().delete(TaskTable.TABLE_NAME, null, null);
     }
     
     @Override
