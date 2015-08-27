@@ -2,11 +2,13 @@ package com.rjokela.todolist;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ToDoListDBHelper extends SQLiteOpenHelper {
@@ -27,6 +29,15 @@ public final class ToDoListDBHelper extends SQLiteOpenHelper {
         public static final String COLUMN_DUEDATE = "duedate";
         public static final String COLUMN_DETAILS = "details";
         public static final String COLUMN_COMPLETE = "complete";
+
+        public static final String[] PROJECTION = {
+                _ID,
+                COLUMN_TITLE,
+                COLUMN_DESCRIPTION,
+                COLUMN_DUEDATE,
+                COLUMN_DETAILS,
+                COLUMN_COMPLETE
+        };
         
         public static final String SQL_CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
@@ -59,7 +70,7 @@ public final class ToDoListDBHelper extends SQLiteOpenHelper {
     
     public boolean delete(Task task) {
         int deleted = getWritableDatabase().delete(TaskTable.TABLE_NAME,
-            TaskTable._ID + "=" + task.getId(), null);
+                TaskTable._ID + "=" + task.getId(), null);
         return deleted > 0;
     }
     
@@ -90,6 +101,30 @@ public final class ToDoListDBHelper extends SQLiteOpenHelper {
     public void reset() {
         Log.d(TAG, "reset() called - clearing all entries");
         getWritableDatabase().delete(TaskTable.TABLE_NAME, null, null);
+    }
+
+    public ArrayList<Task> selectAll() {
+        ArrayList<Task> taskArrayList = new ArrayList<Task>();
+        Cursor cursor = getWritableDatabase()
+                .query(TaskTable.TABLE_NAME, TaskTable.PROJECTION, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int idx = 0;
+                long id = cursor.getLong(idx++);
+                String title = cursor.getString(idx++);
+                String desc = cursor.getString(idx++);
+                String duedate = cursor.getString(idx++);
+                String details = cursor.getString(idx++);
+                boolean complete = cursor.getString(idx).equals("TRUE");
+                taskArrayList.add(new Task(id, title, desc, duedate, details, complete));
+            } while (cursor.moveToNext());
+        }
+
+        if (!cursor.isClosed())
+            cursor.close();
+
+        return  taskArrayList;
     }
     
     @Override
