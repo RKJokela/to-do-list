@@ -8,8 +8,16 @@
           android:icon="@android:drawable/ic_menu_add"
           android:orderInCategory="50"
           app:showAsAction="always"/>
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
+    <item android:id="@+id/action_sortDate"
+          android:title="@string/action_sortDate"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+    <item android:id="@+id/action_sortTitle"
+          android:title="@string/action_sortTitle"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+    <item android:id="@+id/action_sortCreated"
+          android:title="@string/action_sortCreated"
           android:orderInCategory="100"
           app:showAsAction="never"/>
 </menu>

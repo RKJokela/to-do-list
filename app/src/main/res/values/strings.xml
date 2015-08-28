@@ -11,6 +11,9 @@
     <string name="add_task_details_label">Details:</string>
     <string name="add_task_error_toast">Title and valid date are required</string>
     <string name="no_details_message">(no details provided for this item)</string>
+    <string name="action_sortDate">Sort by Due Date</string>
+    <string name="action_sortTitle">Sort by Title</string>
+    <string name="action_sortCreated">Sort by Created</string>
 
     <item name="request_code_addtask" type="id"/>
 </resources>
