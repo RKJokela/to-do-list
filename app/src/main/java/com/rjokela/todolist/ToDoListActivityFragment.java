@@ -83,8 +83,11 @@ public class ToDoListActivityFragment extends Fragment {
         if (requestCode == AddTaskActivityFragment.REQUEST_CODE) {
             switch (resultCode) {
                 case AddTaskActivityFragment.RESULT_CODE_SUCCESS:
-                    String title = data.getStringExtra(AddTaskActivityFragment.EXTRA_TASK);
-                    addTask(new Task(title, "09/09/99"));
+                    String title = data.getStringExtra(AddTaskActivityFragment.EXTRA_TITLE);
+                    String desc = data.getStringExtra(AddTaskActivityFragment.EXTRA_DESC);
+                    String date = data.getStringExtra(AddTaskActivityFragment.EXTRA_DATE);
+                    String details = data.getStringExtra(AddTaskActivityFragment.EXTRA_DETAILS);
+                    addTask(new Task(0, title, desc, date, details, false));
                     break;
                 case AddTaskActivityFragment.RESULT_CODE_CANCELED:
                     break;
