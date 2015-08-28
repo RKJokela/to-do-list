@@ -1,5 +1,8 @@
 package com.rjokela.todolist;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -57,6 +60,14 @@ public class ToDoListActivityFragment extends Fragment {
         // init list view
         ListView listView = (ListView) getActivity().findViewById(R.id.taskList_listView);
         listView.setAdapter(taskAdapter);
+        // on click, show details
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showDetails(taskAdapter.getItem(position));
+            }
+        });
+        // on long click, delete the task
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -143,5 +154,26 @@ public class ToDoListActivityFragment extends Fragment {
 
         dbHelper.insert(task);
         Log.d(TAG, "new task ID is " + task.getId());
+    }
+
+    void showDetails(Task task) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        String detailsLabel = getString(R.string.add_task_details_label);
+        String details = task.getDetails();
+        if (details.isEmpty())
+            details = getString(R.string.no_details_message);
+        builder
+                .setTitle(task.getTitle() + " " + detailsLabel)
+                .setMessage(details)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close dialog
+                        dialog.cancel();
+                    }
+                });
+
+        builder.create().show();
     }
 }
