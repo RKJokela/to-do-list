@@ -152,6 +152,7 @@ public class ToDoListActivityFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Log.d(TAG, "onStart() called");
+        sortTasks();
     }
 
     @Override
@@ -165,7 +166,6 @@ public class ToDoListActivityFragment extends Fragment {
         super.onResume();
         Log.d(TAG, "onResume() called");
         reloadFromDB();
-        sortTasks();
     }
 
     @Override
