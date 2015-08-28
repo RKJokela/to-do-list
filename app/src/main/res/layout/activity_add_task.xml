@@ -1,6 +1,6 @@
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          android:id="@+id/fragment"
+          android:id="@+id/fragment_add_task"
           android:name="com.rjokela.todolist.AddTaskActivityFragment"
           tools:layout="@layout/fragment_add_task"
           android:layout_width="match_parent"
