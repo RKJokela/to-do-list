@@ -1,5 +1,6 @@
 package com.rjokela.todolist;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -68,11 +69,58 @@ public class ToDoListActivityFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_addtask) {
-            // TODO: remove this line
-            addTask(new Task("Finish Homework", "08/31/15"));
+            Intent i = new Intent(getActivity(), AddTaskActivity.class);
+            startActivityForResult(i, AddTaskActivityFragment.REQUEST_CODE);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == AddTaskActivityFragment.REQUEST_CODE) {
+            switch (resultCode) {
+                case AddTaskActivityFragment.RESULT_CODE_SUCCESS:
+                    String title = data.getStringExtra(AddTaskActivityFragment.EXTRA_TASK);
+                    addTask(new Task(title, "09/09/99"));
+                    break;
+                case AddTaskActivityFragment.RESULT_CODE_CANCELED:
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart() called");
+    }
+
+    private void reloadFromDB() {
+        tasks = dbHelper.selectAll();
+        taskAdapter.clear();
+        taskAdapter.addAll(tasks);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+        reloadFromDB();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause() called");
     }
 
     void deleteTask(int position) {

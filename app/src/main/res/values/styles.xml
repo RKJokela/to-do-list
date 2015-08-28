@@ -12,4 +12,15 @@
         <item name="colorAccent">@color/yellow</item>
     </style>
 
+    <style name="AddTaskTheme" parent="Theme.AppCompat.Dialog">
+        <!-- Customize your theme here. -->
+
+        <!-- primary color used for default action bar background -->
+        <item name="colorPrimary">@color/bluegray_dark</item>
+        <!-- primary color used for the status bar -->
+        <item name="colorPrimaryDark">@color/bluegray_dark</item>
+        <!-- accent color used as default value for colorControlActivated -->
+        <item name="colorAccent">@color/yellow</item>
+    </style>
+
 </resources>
