@@ -1,7 +1,6 @@
 package com.rjokela.todolist;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -15,12 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -31,6 +26,8 @@ import java.util.List;
 public class ToDoListActivityFragment extends Fragment {
     public static final String TAG = "ToDoListFragment";
 
+    // request code for intent
+    public static final short REQUEST_CODE = 42;
     // instance state keys
     public static final String SORT_METHOD = "sortmethod";
 
@@ -104,7 +101,7 @@ public class ToDoListActivityFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_addtask:
                 Intent i = new Intent(getActivity(), AddTaskActivity.class);
-                startActivityForResult(i, AddTaskActivityFragment.REQUEST_CODE);
+                startActivityForResult(i, REQUEST_CODE);
                 return true;
             case R.id.action_sortDate:
                 sortMethod = Task.SORT_BY_DATE;
@@ -133,7 +130,7 @@ public class ToDoListActivityFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == AddTaskActivityFragment.REQUEST_CODE) {
+        if (requestCode == REQUEST_CODE) {
             switch (resultCode) {
                 case AddTaskActivityFragment.RESULT_CODE_SUCCESS:
                     String title = data.getStringExtra(AddTaskActivityFragment.EXTRA_TITLE);

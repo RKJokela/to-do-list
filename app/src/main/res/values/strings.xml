@@ -14,6 +14,4 @@
     <string name="action_sortDate">Sort by Due Date</string>
     <string name="action_sortTitle">Sort by Title</string>
     <string name="action_sortCreated">Sort by Created</string>
-
-    <item name="request_code_addtask" type="id"/>
 </resources>

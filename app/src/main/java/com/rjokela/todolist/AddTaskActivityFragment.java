@@ -36,7 +36,6 @@ public class AddTaskActivityFragment extends Fragment implements DatePickerDialo
     public static final String EXTRA_DATE = "date";
     public static final String EXTRA_DETAILS = "details";
 
-    public static final short REQUEST_CODE = (short) R.id.request_code_addtask;
     public static final int RESULT_CODE_SUCCESS = 0;
     public static final int RESULT_CODE_CANCELED = 1;
 
